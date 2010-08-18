@@ -32,12 +32,23 @@
                      forState:UIControlStateNormal];
     playPauseButton.tag = PLAYPAUSE_BUTTON_PAUSED_TAG;
 
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     statusRequestInProgress = FALSE;
     statusTimer = [NSTimer scheduledTimerWithTimeInterval:1
                                                    target:self
                                                  selector:@selector(statusTimerTick:)
                                                  userInfo:nil
                                                   repeats:TRUE];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [statusTimer invalidate];
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark -
